@@ -14,8 +14,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 #Which packages are we packing? 
 ```{r}
-pacman::p_load(sf, tidyverse)
-install.packages("dplyr")
+pacman::p_load(sf, tidyverse, dplyr)
 install.packages("janitor")
 install.packages("ggplot2")
 install.packages("leaflet")
@@ -47,14 +46,14 @@ jrotc_raw_first_half
 ```
 # a) bind with Air Force addresses 
 ```{r}
-#jrotc_airforce <- read.csv("INSERT AIR FORCE SPREADSHEET")
+jrotc_airforce <- read.csv("/Users/liasalvatierra/Desktop/MEJO570FA23/FINAL/jrotc_airforce.csv")
 
-#jrotc_raw <- cbind(jrotc_raw_first_half, jrotc_airforce) #Make sure the columns have the same names
+jrotc_raw <- rbind(jrotc_raw_first_half, jrotc_airforce) #Make sure the columns have the same names
 ```
 # b) Format for tidygeocoder
 
 ```{r}
-jrotc_for_geo <- jrotc_raw_first_half %>%
+jrotc_for_geo <- jrotc_raw %>%
   unite(full_addresses, HIGH.SCHOOL, ADDRESS, CITY, STATE, ZIP, sep = ",")
 jrotc_for_geo 
 ```
